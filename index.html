@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: #f5f5f5;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+
+    .todo-container {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .input-group {
+      display: flex;
+      margin-bottom: 1rem;
+    }
+
+    .input-group input {
+      flex: 1;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 8px 0 0 8px;
+      outline: none;
+    }
+
+    /* .input-group button {
+      padding: 0.5rem 1rem;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 0 8px 8px 0;
+      cursor: pointer;
+    } */
+
+    .input-group button:hover {
+      background: #45a049;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      /* border: 2px solid green; */
+    }
+
+    li {
+      background: #f1f1f1;
+      padding: 0.75rem;
+      margin-bottom: 0.5rem;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      /* border: 2px solid red; */
+    }
+
+    li span {
+      flex: 1;
+    }
+
+    li button {
+      background: transparent;
+      border: none;
+      color: #d11a2a;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    li button:hover {
+      text-decoration: underline;
+    }
+    .edit-input{
+      background: #f1f1f1;
+      width: 90%;
+      padding: 0.75rem;
+      margin-bottom: 0.5rem;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .edit-field{
+      display: flex;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="todo-container">
+    <h2>My To-Do List</h2>
+    <div class="input-group">
+      <input type="text" id="todo-input" placeholder="Add a new task...">
+      <button id="add-btn" onclick="addlist()">Add</button>
+    </div>
+    <ul id="todo-list">
+
+    </ul>
+  </div>
+<script>
+      let myarr = []
+      let count = 0
+      function addlist(){
+        const add = document.getElementById("todo-input")
+        user_value = add.value
+        const mydate = new Date()
+        myarr.push({task:`${user_value}`,timestamp:`${mydate.getHours()}:${mydate.getMinutes()}`})
+        console.log(myarr[myarr.length - 1]);
+        count = count + 1
+        console.log(myarr);
+        
+        showlist(myarr[myarr.length - 1])
+    
+
+      }
+      function showlist(item){
+        const li = document.createElement("li")
+        li.setAttribute("id",`${count}`)
+        const button1 = document.createElement("button")
+        const button2 = document.createElement("button")
+        const ul = document.getElementById("todo-list")
+        li.appendChild(document.createTextNode(`${item.task}                     `))
+        li.appendChild(document.createTextNode(`                    ${item.timestamp}`))
+        li.appendChild(button1)
+        li.appendChild(button2)
+        button1.appendChild(document.createTextNode("edit"))
+        button2.appendChild(document.createTextNode("remove"))
+        ul.appendChild(li)
+        button1.setAttribute("onclick","editlist(this)")
+        button2.setAttribute("onclick",`removelist(this)`)
+      
+        
+      }
+      function removelist(button){
+        const li = button.parentElement;
+        myarr.splice(li.getAttribute("id")-1,1)
+        console.log(li);
+        li.remove();
+      }
+
+  function editlist(button){
+  const li = button.parentElement;
+  const id = li.getAttribute("id");
+
+  const div = document.createElement("div");
+  div.className = 'edit-field';
+  
+  const input = document.createElement("input");
+  input.type = 'text';
+  input.className = 'edit-input';
+  input.value = myarr[id-1].task;  
+  div.appendChild(input);
+  
+  const saveButton = document.createElement("button");
+  saveButton.appendChild(document.createTextNode("save"));
+  div.appendChild(saveButton);
+
+  saveButton.onclick = function() {
+    save(input.value, id, div);
+  }
+
+  li.replaceWith(div);
+}
+
+function save(newTaskValue, id, div){
+  id = parseInt(id);  
+  
+  const mydate = new Date();
+  myarr[id-1].task = newTaskValue;
+  myarr[id-1].timestamp = `${mydate.getHours()}:${mydate.getMinutes()}`;
+  
+  console.log(myarr);
+  
+  
+  const li = document.createElement("li");
+  li.setAttribute("id", id);
+  
+  const button1 = document.createElement("button");
+  const button2 = document.createElement("button");
+  
+  li.appendChild(document.createTextNode(`${myarr[id-1].task}                     `));
+  li.appendChild(document.createTextNode(`                    ${myarr[id-1].timestamp}`));
+  li.appendChild(button1);
+  li.appendChild(button2);
+  
+  button1.appendChild(document.createTextNode("edit"));
+  button2.appendChild(document.createTextNode("remove"));
+  
+  button1.setAttribute("onclick", "editlist(this)");
+  button2.setAttribute("onclick", "removelist(this)");
+  
+  div.replaceWith(li);
+}
+
+      
+      
+
+</script>
+</body>
+</html>
