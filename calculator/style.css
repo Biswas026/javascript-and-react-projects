@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Sansation:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+
+html, body{
+    height: 100%;
+    width: 100%;
+    font-family: "Sansation", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+      
+}
+
+.button{
+    padding: 20px;
+    margin: 0 3px;
+    border: 2px solid black;
+    border-radius: 9px;
+    cursor: pointer;
+}
+.row{
+    margin: 8px 0;
+}
+
+.row input{
+    font-size: 20px;
+    margin: 0;
+    padding: 11px 0px  ;
+    border: 2px solid black;
+    border-radius: 9px;
+}
+
+.container{
+    background-color: #1C1C1E;
+    width: 50vh;
+    border-radius: 30px;
+    box-shadow: orange 10px 10px;
+}
+.button {
+    width: 70px;
+    height: 70px;
+    border-radius: 35px;
+    font-size: 28px;
+    text-align: center;
+    line-height: 70px;
+    background-color: #505050; /* for number buttons */
+    color: white;
+    padding: 3px;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+  }
+
+  .button:hover{
+    background-color: #FF9500 ;
+
+  }
+  .prev-history{
+    background-color: #1C1C1E;
+    color: white;
+    width: 50vh;
+    height: 60vh;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin: auto;
+
+  }
+  /* .back-button{
+
+  }
+   */

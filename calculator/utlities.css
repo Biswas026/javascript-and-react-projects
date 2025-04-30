@@ -1,0 +1,29 @@
+/* *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+} */
+
+
+.text-area{
+    text-align: center;
+}
+
+/* .bg-red{
+    background: red;
+} */
+
+.mx-auto{
+    margin: auto;
+}
+
+.flex{
+    display: flex;
+}
+.flex-col{
+    flex-direction: column;
+}
+
+.items-center{
+    align-items: center;
+}
