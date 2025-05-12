@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+   .container {
+    width: 300px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+}
+
+.input-group p {
+    margin: 5px 0 0;
+    font-size: 0.85em;
+    color: red;
+}
+
+.su-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.su-btn:hover {
+    background-color: #0056b3;
+}
+
+    
+</style>
+<body>
+    <form action="">   <div class="container">
+        <div class="input-group">
+            <label for="name">Name</label>
+            <input type="text" id="name">
+            <p style="color: red;" id="e_name"></p>
+        </div>
+    
+        <div class="input-group">
+            <label for="phone">Phone number</label>
+            <input type="number" id="phone">
+            <p style="color: red;" id="e_phone"></p>
+        </div>
+    
+        <div class="input-group">
+            <label for="email">Email</label>
+            <input type="email" id="email">
+            <p style="color: red;" id="e_email"></p>
+        </div>
+    
+        <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password">
+            <p style="color: red;" id="e_password"></p>
+        </div>
+        <div class="input-group">
+            <label for="cpassword">Confirm Password</label>
+            <input type="password" id="cpassword">
+            <p style="color: red;" id="e_cpassword"></p>
+        </div>
+    
+        <button class="su-btn">Submit</button>
+    </div>
+</form>
+ 
+    
+    <script>
+        let arr = {}
+        let name = document.querySelector('#name')
+        let phone = document.querySelector('#phone')
+        let email = document.querySelector('#email')
+        let password = document.querySelector('#password')
+        let cpassword = document.querySelector("#cpassword")
+        
+        let input = document.querySelectorAll(".input-group")
+
+        input.forEach(ele => ele.addEventListener(
+            "input", function (){
+                ele.lastElementChild.innerHTML = ""
+            }
+        ))
+
+        let btn = document.querySelector(".su-btn")
+        btn.addEventListener("click",function(e){
+            e.preventDefault()
+            let para = document.querySelectorAll(".input-group p")
+            para.forEach((ele) => ele.innerHTML = "")
+            arr.name = name.value;
+            arr.phone = phone.value;
+            arr.email = email.value;
+            arr.password = password.value;
+            arr.cpassword = cpassword.value;
+            let e_array = []
+            for(let key in arr){
+                if(arr[key] === ""){
+                    let p = document.querySelector(`#e_`+ `${key}`)
+                    e_array.push(p)   
+                    console.log(e_array);
+                                                        
+                }
+            }
+            for(let i = 0; i < e_array.length; i++){
+               e_array[i].innerHTML = "Please Fill this field"
+
+            }
+            if(arr["password"] !== arr["cpassword"] && (arr["password"] !== "" || arr["cpassword"] !== "")){
+                alert("Your password and confirm password doesn't match")
+                arr["password"].innerHTML = ""
+                arr["cpassword"].innerHTML = ""
+            }
+        })
+
+        
+        
+
+    </script>
+</body>
+</html>
