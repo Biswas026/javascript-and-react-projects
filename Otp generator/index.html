@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            width: 100%;
+           
+        }
+        .container{
+            margin:auto;
+            background-color: black;
+            height: 400px;
+            width: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+        }
+        input{
+            width: 10px;
+            margin: 5px;
+        }
+        button{
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input type="text"class="input" id="input1" maxlength="1"><input type="text"class="input" id="input2" maxlength="1"><input type="text"class="input" id="input3" maxlength="1"><input type="text"class="input" id="input4" maxlength="1">
+        <button id = "Submit_Button">Submit</button>
+    </div>
+</body>
+<script> 
+   let input = document.querySelectorAll(".input")
+   const arr = Array.from(input)
+   const u_arr = []
+   console.log(arr);
+   
+   
+   
+//    arr.forEach((item,index) => {
+//     item.addEventListener("input", function(e){
+//         console.log(e);
+//         if (item.value.length > 0 && arr[index + 1]){
+//             u_arr[index] = item.value
+//             const nextInput = arr[index + 1]
+//             nextInput.focus()
+            
+            
+//         }
+
+//     })
+//     item.addEventListener("keydown", function (e) {
+//         if (e.key === "Backspace" && item.value === "") {
+//         const prevInput = arr[index - 1];
+//         u_arr.pop()
+//         if (prevInput) prevInput.focus();
+//         }
+//         });
+//    })
+
+
+for(let i=0; i<arr.length; i++){
+    arr[i].addEventListener("input",function(e){
+        u_arr[i] = arr[i].value
+        if (arr[i].value.length>0 && arr[i+1]){
+            const nextInput = arr[i + 1]
+            nextInput.focus()
+            
+        }
+    })
+    arr[i].addEventListener("keydown",function(e){
+        if (e.key === "Backspace" && arr[i].value === "") {
+        const prevInput = arr[i-1];
+        console.log(i);
+        u_arr.pop()
+        if (prevInput) prevInput.focus();
+        }
+
+
+    })
+}
+
+
+
+
+//Otp generator logic 
+console.log(u_arr);
+let otp = Math.floor((Math.random()+ 1)* 1000) 
+console.log(otp);
+
+let submit = document.querySelector("#Submit_Button")
+submit.addEventListener("click",() => {
+    if(u_arr.join("") === otp.toString()){
+        alert("Correct Otp")
+    }
+    else{
+        alert("Incorrect Otp")
+    }
+    location.reload()
+})
+   
+
+</script>
+</html>
