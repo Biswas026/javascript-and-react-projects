@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ColorChanger</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sansation:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Share+Tech&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        font-family: "Share Tech", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+      }
+      .container {
+        border: 3px dotted black;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>START should change the color in every second</h1>
+      <button id="Start">Start</button>
+      <button id="Stop">Stop</button>
+    </div>
+    <script>
+      let Start = document.querySelector("#Start");
+      let Stop = document.querySelector("#Stop");
+      let arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "A", "B", "C", "D", "E", "F"];
+      let changecolor;
+      Start.addEventListener("click", function () {
+        let body = document.querySelector("body");
+
+        if (!changecolor) {
+          changecolor = setInterval(function () {
+            let color = "#";
+            for (let i = 0; i < 6; i++) {
+              color =
+                color + arr[Math.floor(Math.random() * arr.length)].toString();
+            }
+            body.style.backgroundColor = color;
+          }, 1000);
+        }
+      });
+      Stop.addEventListener("click", function () {
+        console.log("clicked");
+        clearInterval(changecolor);
+        changecolor = null;
+      });
+    </script>
+  </body>
+</html>
